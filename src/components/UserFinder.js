@@ -10,10 +10,14 @@ const DUMMY_USERS = [
 ];
 
 class UserFinder extends Component {
+  componentWillUnmount() {
+    console.log("COMPONENT UNMOUNT");
+  }
+
   constructor() {
     super();
     this.state = {
-      filteredUsers: DUMMY_USERS,
+      filteredUsers: [],
       searchTerm: "",
     };
   }
@@ -25,6 +29,11 @@ class UserFinder extends Component {
           user.name.includes(this.state.searchTerm)
         ),
       });
+  }
+
+  componentDidMount() {
+    //send your http request
+    this.setState({ filteredUsers: DUMMY_USERS });
   }
 
   searchChangeHandler(event) {
